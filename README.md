@@ -1,4 +1,6 @@
-# vue-ssr-starter-kit
+# vue-starter
+
+based on original `vue-ssr-starter-kit` project by @doabit, which is in turn based on vue-hackernews2
 
 > A Vue.js project with vue 2.0, vue-router and vuex starter kit for server side rendering.
 
