@@ -12,6 +12,7 @@ import { mapGetters } from 'vuex'
 const fetchInitialData = store => {
   return store.dispatch(`getTopics`)
 }
+
 export default {
   prefetch: fetchInitialData,
   computed: {
@@ -20,6 +21,7 @@ export default {
     })
   },
   mounted () {
+    // TODO: skip in browser on the first render if already fetched during SSR
     fetchInitialData(this.$store)
   }
 }
