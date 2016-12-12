@@ -8,13 +8,15 @@ based on original `vue-ssr-starter-kit` project by @doabit, which is in turn bas
 
 ## Build Setup
 
+Requires Node.js v6+
+
 ``` bash
 npm install
 npm run build
 npm start
 ```
 
-## Devlopment Setup
+## Development Setup
 
 ```bash
 npm install
