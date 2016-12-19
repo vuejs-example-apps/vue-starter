@@ -6,6 +6,7 @@ const path = require('path')
 const resolve = file => path.resolve(__dirname, file)
 const express = require('express')
 const favicon = require('serve-favicon')
+const compression = require('compression')
 const serialize = require('serialize-javascript')
 
 const createBundleRenderer = require('vue-server-renderer').createBundleRenderer
@@ -44,8 +45,16 @@ function createRenderer (bundle) {
   })
 }
 
-app.use('/dist', express.static(resolve('./dist')))
-app.use(favicon(path.resolve(__dirname, 'src/assets/logo.png')))
+const serve = (path, cache) => express.static(resolve(path), {
+  maxAge: cache && isProd ? 60 * 60 * 24 * 30 : 0
+})
+
+app.use(compression({ threshold: 0 }))
+app.use(favicon('./src/assets/logo.png'))
+app.use('/service-worker.js', serve('./dist/service-worker.js'))
+app.use('/manifest.json', serve('./manifest.json'))
+app.use('/dist', serve('./dist'))
+app.use('/public', serve('./public'))
 
 app.get('*', (req, res) => {
   if (!renderer) {
